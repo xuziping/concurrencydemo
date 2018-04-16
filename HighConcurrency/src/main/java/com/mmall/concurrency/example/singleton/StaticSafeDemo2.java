@@ -7,22 +7,22 @@ import com.mmall.concurrency.annoations.ThreadSafe;
  * 单例实例在类装载时进行创建
  */
 @ThreadSafe
-public class SingletonExample6 {
+public class StaticSafeDemo2 {
 
     // 私有构造函数
-    private SingletonExample6() {
+    private StaticSafeDemo2() {
 
     }
 
     // 单例对象
-    private static SingletonExample6 instance = null;
+    private static StaticSafeDemo2 instance = null;
 
     static {
-        instance = new SingletonExample6();
+        instance = new StaticSafeDemo2();
     }
 
     // 静态的工厂方法
-    public static SingletonExample6 getInstance() {
+    public static StaticSafeDemo2 getInstance() {
         return instance;
     }
 

@@ -9,20 +9,20 @@ import com.mmall.concurrency.annoations.ThreadSafe;
  */
 @ThreadSafe
 @NotRecommend
-public class SingletonExample3 {
+public class SynchronizedMethodSafeDemo {
 
     // 私有构造函数
-    private SingletonExample3() {
+    private SynchronizedMethodSafeDemo() {
 
     }
 
     // 单例对象
-    private static SingletonExample3 instance = null;
+    private static SynchronizedMethodSafeDemo instance = null;
 
     // 静态的工厂方法
-    public static synchronized SingletonExample3 getInstance() {
+    public static synchronized SynchronizedMethodSafeDemo getInstance() {
         if (instance == null) {
-            instance = new SingletonExample3();
+            instance = new SynchronizedMethodSafeDemo();
         }
         return instance;
     }

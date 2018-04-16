@@ -7,10 +7,10 @@ import com.mmall.concurrency.annoations.NotThreadSafe;
  * 单例实例在第一次使用时进行创建
  */
 @NotThreadSafe
-public class SingletonExample4 {
+public class SynchronizedCodeUnsafeDemo {
 
     // 私有构造函数
-    private SingletonExample4() {
+    private SynchronizedCodeUnsafeDemo() {
 
     }
 
@@ -25,14 +25,14 @@ public class SingletonExample4 {
     // 2、ctorInstance() 初始化对象
 
     // 单例对象
-    private static SingletonExample4 instance = null;
+    private static SynchronizedCodeUnsafeDemo instance = null;
 
     // 静态的工厂方法
-    public static SingletonExample4 getInstance() {
+    public static SynchronizedCodeUnsafeDemo getInstance() {
         if (instance == null) { // 双重检测机制        // B
-            synchronized (SingletonExample4.class) { // 同步锁
+            synchronized (SynchronizedCodeUnsafeDemo.class) { // 同步锁
                 if (instance == null) {
-                    instance = new SingletonExample4(); // A - 3
+                    instance = new SynchronizedCodeUnsafeDemo(); // A - 3
                 }
             }
         }
