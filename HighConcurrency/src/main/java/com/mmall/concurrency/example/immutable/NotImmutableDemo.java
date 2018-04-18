@@ -8,7 +8,7 @@ import java.util.Map;
 
 @Slf4j
 @NotThreadSafe
-public class ImmutableExample1 {
+public class NotImmutableDemo {
 
     private final static Integer a = 1;
     private final static String b = "2";

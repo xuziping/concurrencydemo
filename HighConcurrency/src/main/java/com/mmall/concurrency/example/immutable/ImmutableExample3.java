@@ -19,6 +19,7 @@ public class ImmutableExample3 {
 
 
     public static void main(String[] args) {
+        map2.put(3, 5);
         System.out.println(map2.get(3));
     }
 }

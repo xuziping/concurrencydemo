@@ -9,7 +9,7 @@ import java.util.Map;
 
 @Slf4j
 @ThreadSafe
-public class ImmutableExample2 {
+public class UnmodifiableMapDemo {
 
     private static Map<Integer, Integer> map = Maps.newHashMap();
 
