@@ -1,19 +1,18 @@
 package com.mmall.concurrency.example.commonUnsafe;
 
-import com.mmall.concurrency.annoations.ThreadSafe;
+import com.mmall.concurrency.annoations.NotThreadSafe;
 import lombok.extern.slf4j.Slf4j;
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 
 @Slf4j
-@ThreadSafe
-public class DateFormatExample3 {
+@NotThreadSafe
+public class HashMapUnsafeDemo {
 
     // 请求总数
     public static int clientTotal = 5000;
@@ -21,7 +20,7 @@ public class DateFormatExample3 {
     // 同时并发执行的线程数
     public static int threadTotal = 200;
 
-    private static DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("yyyyMMdd");
+    private static Map<Integer, Integer> map = new HashMap<>();
 
     public static void main(String[] args) throws Exception {
         ExecutorService executorService = Executors.newCachedThreadPool();
@@ -42,9 +41,10 @@ public class DateFormatExample3 {
         }
         countDownLatch.await();
         executorService.shutdown();
+        log.info("size:{}", map.size());
     }
 
     private static void update(int i) {
-        log.info("{}, {}", i, DateTime.parse("20180208", dateTimeFormatter).toDate());
+        map.put(i, i);
     }
 }

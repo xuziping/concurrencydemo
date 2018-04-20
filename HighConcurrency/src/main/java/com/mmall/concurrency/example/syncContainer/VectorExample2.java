@@ -9,11 +9,10 @@ public class VectorExample2 {
 
     private static Vector<Integer> vector = new Vector<>();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
 
-        while (true) {
 
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 500000; i++) {
                 vector.add(i);
             }
 
@@ -29,11 +28,14 @@ public class VectorExample2 {
                 public void run() {
                     for (int i = 0; i < vector.size(); i++) {
                         vector.get(i);
+                        try {
+                            Thread.sleep(100);
+                        } catch(Exception e) {
+                        }
                     }
                 }
             };
             thread1.start();
             thread2.start();
-        }
     }
 }

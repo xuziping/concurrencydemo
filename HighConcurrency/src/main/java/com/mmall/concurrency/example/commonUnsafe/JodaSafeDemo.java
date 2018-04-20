@@ -2,6 +2,9 @@ package com.mmall.concurrency.example.commonUnsafe;
 
 import com.mmall.concurrency.annoations.ThreadSafe;
 import lombok.extern.slf4j.Slf4j;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -10,7 +13,7 @@ import java.util.concurrent.Semaphore;
 
 @Slf4j
 @ThreadSafe
-public class StringExample2 {
+public class JodaSafeDemo {
 
     // 请求总数
     public static int clientTotal = 5000;
@@ -18,17 +21,18 @@ public class StringExample2 {
     // 同时并发执行的线程数
     public static int threadTotal = 200;
 
-    public static StringBuffer stringBuffer = new StringBuffer();
+    private static DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("yyyyMMdd");
 
     public static void main(String[] args) throws Exception {
         ExecutorService executorService = Executors.newCachedThreadPool();
         final Semaphore semaphore = new Semaphore(threadTotal);
         final CountDownLatch countDownLatch = new CountDownLatch(clientTotal);
-        for (int i = 0; i < clientTotal ; i++) {
+        for (int i = 0; i < clientTotal; i++) {
+            final int count = i;
             executorService.execute(() -> {
                 try {
                     semaphore.acquire();
-                    update();
+                    update(count);
                     semaphore.release();
                 } catch (Exception e) {
                     log.error("exception", e);
@@ -38,10 +42,9 @@ public class StringExample2 {
         }
         countDownLatch.await();
         executorService.shutdown();
-        log.info("size:{}", stringBuffer.length());
     }
 
-    private static void update() {
-        stringBuffer.append("1");
+    private static void update(int i) {
+        log.info("{}, {}", i, DateTime.parse("20180208", dateTimeFormatter).toDate());
     }
 }

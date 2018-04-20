@@ -12,7 +12,7 @@ import java.util.concurrent.Semaphore;
 
 @Slf4j
 @NotThreadSafe
-public class ArrayListExample {
+public class ArrayListUnsafeDemo {
 
     // 请求总数
     public static int clientTotal = 5000;
